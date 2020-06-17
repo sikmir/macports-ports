@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           cmake 1.1
+PortGroup           github 1.0
+PortGroup           qt5 1.0
+
+github.setup        zealdocs zeal 0.8.0 v
+categories          devel
+platforms           darwin
+license             GPL-3+
+maintainers         {@sikmir disroot.org:sikmir} openmaintainer
+
+description         Offline documentation browser
+long_description    Zeal is a simple offline documentation \
+                    browser inspired by Dash.
+homepage            https://zealdocs.org/
+
+checksums           rmd160  f76ed19f3c7c421b34a59ded9e0f1d17fe628415 \
+                    sha256  e68531be6f5821ec5f2a0dadbe2066400dbf8e4024a3c9917f2f792f97e807b1 \
+                    size    1114651
+
+depends_lib-append  port:libarchive \
+                    port:sqlite3
+
+qt5.depends_component qtwebengine
+
+destroot {
+    copy ${workpath}/build/Zeal.app ${destroot}${applications_dir}
+}
